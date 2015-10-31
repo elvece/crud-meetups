@@ -1,5 +1,5 @@
 TO DO:
 
+-set up mongo schema
 -define routes
--set up with mongo
 -refactor into postgresql
