@@ -54,4 +54,24 @@ router.delete('/meetup/:id', function(req, res, next){
   });
 });
 
+router.put('/meetup/:id', function(req, res, next){
+  var id = {"_id": req.params.id};
+  var payload = {
+    name: req.body.name,
+    category: req.body.category,
+    location: req.body.location,
+    coordinates: req.body.coordinates,
+    time: req.body.time,
+    date: req.body.date,
+    members: req.body.members
+  };
+  Meetup.findOneAndUpdate(id, payload, function(err, data){
+    if (err){
+      throw err;
+    } else {
+      res.json({Message: 'Meetup Updated.'});
+    }
+  });
+});
+
 module.exports = router;
