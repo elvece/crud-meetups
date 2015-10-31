@@ -14,12 +14,15 @@ router.get('/meetups', function(req, res, next) {
   });
 });
 
-router.get('/meetups/:id', function(req, res, next){
-  Meetup.findById(function(err, data){
+router.get('/meetup/:id', function(req, res, next){
+  var id = {'_id': req.params.id};
+  Meetup.findOne(id, function(err, data){
     if(err){
-      throw err
+      throw err;
+    } else {
+      res.json(data);
     }
-  })
+  });
 });
 
 router.post('/meetups', function(req, res, next){
