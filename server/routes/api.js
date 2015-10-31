@@ -8,7 +8,6 @@ router.get('/meetups', function(req, res, next) {
     if(err){
       throw err;
     } else {
-      console.log(data);
       res.json(data);
     }
   });
@@ -40,6 +39,17 @@ router.post('/meetups', function(req, res, next){
       throw err;
     } else {
       res.json({Message:'Meetup Saved!'});
+    }
+  });
+});
+
+router.delete('/meetup/:id', function(req, res, next){
+  var id = {"_id": req.params.id};
+  Meetup.findOneAndRemove(id, function(err, data){
+    if(err){
+      throw err;
+    } else {
+      res.json({Message: 'Meetup Removed.'});
     }
   });
 });
