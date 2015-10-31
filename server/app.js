@@ -1,3 +1,6 @@
+// *** database ***//
+require('../models/meetups');
+
 // *** main dependencies *** //
 var express = require('express');
 var path = require('path');
@@ -10,7 +13,7 @@ var swig = require('swig');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
-
+var api = require('./routes/api.js');
 
 // *** express instance *** //
 var app = express();
@@ -33,9 +36,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
 
+//*** mongoose ***//
+mongoose.connect('mongodb://localhost/crud-meetups');
 
 // *** main routes *** //
 app.use('/', routes);
+app.use('/api', routes);
 
 
 // catch 404 and forward to error handler
